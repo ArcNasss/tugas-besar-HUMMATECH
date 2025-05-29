@@ -15,7 +15,7 @@ class Penjualan extends Model
 
     public function kasir()
     {
-        return $this->belongsTo(Kasir::class);
+        return $this->belongsTo(User::class);
     }
 
     public function detailPenjualans()
