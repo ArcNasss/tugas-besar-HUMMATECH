@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\Pembeli;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,13 +17,13 @@ class AuthController extends Controller
     {
         $request->validate([
            'nama' => 'required|string|max:255',
-           'jenis_kelamin' => 'required|in:L,P',
+           'jenis_kelamin' => 'required',
             'alamat' => 'nullable|string|max:255',
             'no_hp' => 'nullable|string|max:20',
 
         ]);
 
-        $user = User::create([
+        $pembeli = Pembeli::create([
             'nama' => $request->nama,
             'jenis_kelamin' => $request->jenis_kelamin,
             'alamat' => $request->alamat,
@@ -44,11 +46,12 @@ class AuthController extends Controller
             'nama' => 'required|string|max:255',
         ]);
 
-        if( User::where('nama', $request->nama)->exists()) {
+        if( Pembeli::where('nama', $request->nama)->exists()) {
 
             return redirect()->route('dashboard')->with('success', 'Login successful!');
         } else {
-            return redirect()->back()->withErrors(['nama' => 'User not found. Please register first.']);
+            return redirect()->back()->with('error', 'User not found. Please register first.');
+
         }
     }
 

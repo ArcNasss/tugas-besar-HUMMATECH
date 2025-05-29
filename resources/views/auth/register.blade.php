@@ -1,52 +1,273 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en" class="h-full">
 <head>
     <meta charset="UTF-8">
-    <title>Register</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | Sedunusa</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            200: '#bbf7d0',
+                            300: '#86efac',
+                            400: '#4ade80',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            700: '#15803d',
+                            800: '#166534',
+                            900: '#14532d',
+                        },
+                        dark: {
+                            900: '#0f172a',
+                            800: '#1e293b',
+                            700: '#334155',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #0f172a 0%, #14532d 100%);
+        }
+        .input-field {
+            background: rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+        .input-field:focus {
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.5);
+        }
+        .radio-card {
+            background: rgba(255, 255, 255, 0.03);
+            transition: all 0.3s ease;
+        }
+        .radio-card:hover {
+            background: rgba(255, 255, 255, 0.07);
+        }
+        .radio-card.selected {
+            background: rgba(34, 197, 94, 0.1);
+            border-color: rgba(34, 197, 94, 0.5);
+        }
+    </style>
 </head>
-<body class="bg-gray-100 flex items-center justify-center min-h-screen">
-    <div class="bg-white p-8 rounded-xl shadow-md w-full max-w-md">
-        <h2 class="text-2xl font-semibold mb-6 text-center">Register Pembeli</h2>
+<body class="gradient-bg min-h-full flex items-center justify-center p-4 font-sans text-white">
+    <div class="glass-card rounded-2xl overflow-hidden w-full max-w-xl">
+        <!-- Animated Background Element -->
+        <div class="relative h-2 bg-gradient-to-r from-primary-500 to-primary-700">
+            <div class="absolute inset-0 bg-gradient-to-r from-primary-400 to-primary-600 animate-pulse"></div>
+        </div>
 
-        @if ($errors->any())
-            <div class="mb-4 text-red-500 text-sm">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>- {{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-
-        <form method="POST" action="{{ route('register.post') }}" class="space-y-4">
-            @csrf
-
-            <div>
-                <label class="block text-sm">Nama</label>
-                <input type="text" name="nama" class="w-full border rounded p-2" required>
+        <div class="p-8">
+            <!-- Logo & Title -->
+            <div class="text-center mb-8">
+                <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary-700/20 mb-4 border border-primary-500/30">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-primary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                    </svg>
+                </div>
+                <h1 class="text-3xl font-bold bg-gradient-to-r from-primary-400 to-white bg-clip-text text-transparent">Buat Akun Baru</h1>
+                <p class="mt-2 text-primary-200">Bergabung dengan komunitas Toko Sedunusa</p>
             </div>
 
-            <div>
-                <label class="block text-sm">Jenis Kelamin</label>
-                <select name="jenis_kelamin" class="w-full border rounded p-2" required>
-                    <option value="L">Laki-laki</option>
-                    <option value="P">Perempuan</option>
-                </select>
-            </div>
+            <!-- Register Form -->
+            <form class="space-y-6" method="POST" action="{{ route('register') }}">
+                @csrf
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="nama" class="block text-sm font-medium text-primary-100 mb-2">Nama Lengkap</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-primary-400">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                            <input id="nama" name="nama" type="text" required
+                                   class="input-field w-full pl-10 pr-3 py-3 rounded-lg border border-white/10 focus:outline-none focus:ring-0"
+                                   placeholder="Nama lengkap">
+                        </div>
+                    </div>
 
-            <div>
-                <label class="block text-sm">Alamat</label>
-                <textarea name="alamat" class="w-full border rounded p-2" required></textarea>
-            </div>
+                    <div>
+                        <label for="no_hp" class="block text-sm font-medium text-primary-100 mb-2">Nomor HP</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-primary-400">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+                                </svg>
+                            </div>
+                            <input id="no_hp" name="no_hp" type="tel" required
+                                   class="input-field w-full pl-10 pr-3 py-3 rounded-lg border border-white/10 focus:outline-none focus:ring-0"
+                                   placeholder="0812-3456-7890">
+                        </div>
+                    </div>
+                </div>
 
-            <div>
-                <label class="block text-sm">No HP</label>
-                <input type="text" name="no_hp" class="w-full border rounded p-2" required>
-            </div>
+                <div>
+                    <label class="block text-sm font-medium text-primary-100 mb-2">Jenis Kelamin</label>
+                    <div class="grid grid-cols-2 gap-3">
+                        <label class="radio-card rounded-lg border border-white/10 p-4 flex items-center cursor-pointer transition-all">
+                            <input type="radio" name="jenis_kelamin" value="L" class="sr-only peer">
+                            <div class="w-5 h-5 rounded-full border border-primary-400 mr-3 flex items-center justify-center peer-checked:bg-primary-500">
+                                <div class="w-2 h-2 rounded-full bg-white opacity-0 peer-checked:opacity-100"></div>
+                            </div>
+                            <div>
+                                <div class="font-medium text-primary-100">Laki-laki</div>
+                            </div>
+                        </label>
+                        <label class="radio-card rounded-lg border border-white/10 p-4 flex items-center cursor-pointer transition-all">
+                            <input type="radio" name="jenis_kelamin" value="P" class="sr-only peer">
+                            <div class="w-5 h-5 rounded-full border border-primary-400 mr-3 flex items-center justify-center peer-checked:bg-primary-500">
+                                <div class="w-2 h-2 rounded-full bg-white opacity-0 peer-checked:opacity-100"></div>
+                            </div>
+                            <div>
+                                <div class="font-medium text-primary-100">Perempuan</div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
 
-            <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition">Register</button>
-        </form>
+                <div>
+                    <label for="alamat" class="block text-sm font-medium text-primary-100 mb-2">Alamat</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 pt-3 flex items-start pointer-events-none text-primary-400">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <textarea id="alamat" name="alamat" rows="3" required
+                               class="input-field w-full pl-10 pr-3 py-3 rounded-lg border border-white/10 focus:outline-none focus:ring-0"
+                               placeholder="Alamat lengkap"></textarea>
+                    </div>
+                </div>
+
+                <div>
+                    <button type="submit"
+                            class="w-full flex justify-center items-center py-3 px-4 rounded-lg bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 text-white font-medium shadow-lg hover:shadow-primary-500/20 transition-all duration-300">
+                        <span>Daftar Sekarang</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="ml-2 h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 9.414V13a1 1 0 102 0V9.414l1.293 1.293a1 1 0 001.414-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                </div>
+            </form>
+
+            <div class="mt-6 text-center">
+                <p class="text-sm text-primary-300">
+                    Sudah punya akun?
+                    <a href="/login" class="font-medium text-primary-400 hover:text-primary-300 transition-colors">Masuk disini</a>
+                </p>
+            </div>
+        </div>
     </div>
+
+    <!-- Web3 Animated Elements -->
+    <div class="fixed top-0 left-0 w-full h-full overflow-hidden pointer-events-none -z-10">
+        <div class="absolute top-20 left-10 w-32 h-32 rounded-full bg-primary-500/10 blur-xl animate-float"></div>
+        <div class="absolute top-1/3 right-20 w-40 h-40 rounded-full bg-primary-600/10 blur-xl animate-float animation-delay-2000"></div>
+        <div class="absolute bottom-20 left-1/3 w-28 h-28 rounded-full bg-primary-400/10 blur-xl animate-float animation-delay-4000"></div>
+    </div>
+
+        <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-4 right-4 z-50 hidden">
+        <div class="glass-card rounded-lg p-4 shadow-lg flex items-start border-l-4 border-primary-500 max-w-xs">
+            <div class="flex-shrink-0">
+                <svg id="toast-icon" class="h-6 w-6 text-primary-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+            </div>
+            <div class="ml-3">
+                <p id="toast-title" class="text-sm font-medium text-white">Success</p>
+                <p id="toast-message" class="mt-1 text-sm text-primary-200">Operasi berhasil dilakukan</p>
+            </div>
+            <button onclick="hideToast()" class="ml-4 flex-shrink-0 text-primary-300 hover:text-white">
+                <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js" defer></script>
+    <script>
+    // Pastikan DOM sudah fully loaded
+    document.addEventListener('DOMContentLoaded', function() {
+        @if(session('success'))
+            showToast('success', '{{ session('success') }}');
+        @endif
+        @if(session('error'))
+            showToast('error', '{{ session('error') }}');
+        @endif
+        @if(session('warning'))
+            showToast('warning', '{{ session('warning') }}');
+        @endif
+    });
+
+    // Fungsi toast yang lebih robust
+    function showToast(type, message) {
+        const toast = document.getElementById('toast');
+        if (!toast) return;
+
+        const toastIcon = document.getElementById('toast-icon');
+        const toastTitle = document.getElementById('toast-title');
+        const toastMessage = document.getElementById('toast-message');
+
+        // Reset classes
+        toastIcon.className = 'h-6 w-6';
+        toastTitle.className = 'text-sm font-medium';
+
+        // Set type
+        switch(type) {
+            case 'success':
+                toastIcon.classList.add('text-primary-400');
+                toastTitle.classList.add('text-white');
+                toastIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />';
+                toastTitle.textContent = 'Success';
+                break;
+            case 'error':
+                toastIcon.classList.add('text-red-500');
+                toastTitle.classList.add('text-red-400');
+                toastIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />';
+                toastTitle.textContent = 'Error';
+                break;
+            case 'warning':
+                toastIcon.classList.add('text-yellow-500');
+                toastTitle.classList.add('text-yellow-400');
+                toastIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />';
+                toastTitle.textContent = 'Warning';
+                break;
+        }
+
+        toastMessage.textContent = message;
+        toast.classList.remove('hidden');
+
+        setTimeout(() => {
+            toast.classList.add('hidden');
+        }, 5000);
+    }
+
+    function hideToast() {
+        const toast = document.getElementById('toast');
+        if (toast) toast.classList.add('hidden');
+    }
+</script>
+    @stack('scripts')
 </body>
 </html>
