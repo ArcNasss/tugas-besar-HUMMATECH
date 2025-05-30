@@ -12,7 +12,7 @@ class PembeliController extends Controller
      */
     public function index()
     {
-        $pembelis = \App\Models\Pembeli::all();
+        $pembelis = \App\Models\Pembeli::paginate(10);
         return view('pembelis.index', compact('pembelis'));
     }
 

@@ -45,5 +45,8 @@
             </tbody>
         </table>
     </div>
+        <div class="mt-4">
+    {{ $pembelis->links() }}
+    </div>
 </div>
 @endsection

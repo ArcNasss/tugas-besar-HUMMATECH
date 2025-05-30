@@ -180,23 +180,35 @@
                         </svg>
                         Pembeli
                     </a>
-                    <a href="" class="sidebar-item flex items-center px-4 py-3 text-sm font-medium rounded-r-lg {{ request()->routeIs('penjualan.*') ? 'active' : '' }}">
+                    <a href="{{route('pembelians.index')}}" class="sidebar-item flex items-center px-4 py-3 text-sm font-medium rounded-r-lg {{ request()->routeIs('penjualan.*') ? 'active' : '' }}">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-primary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
                         </svg>
-                        Transaksi Penjualan
+                        Pembelian
                     </a>
-                    <a href="" class="sidebar-item flex items-center px-4 py-3 text-sm font-medium rounded-r-lg {{ request()->routeIs('pembelian.*') ? 'active' : '' }}">
+                    <a href="{{route('barangs.index')}}" class="sidebar-item flex items-center px-4 py-3 text-sm font-medium rounded-r-lg {{ request()->routeIs('pembelian.*') ? 'active' : '' }}">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-primary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
-                        Pembelian Stok
+                        Barang
                     </a>
-                    <a href="" class="sidebar-item flex items-center px-4 py-3 text-sm font-medium rounded-r-lg {{ request()->routeIs('supplier.*') ? 'active' : '' }}">
+                    <a href="{{route('supliers.index')}}" class="sidebar-item flex items-center px-4 py-3 text-sm font-medium rounded-r-lg {{ request()->routeIs('supplier.*') ? 'active' : '' }}">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-primary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                         </svg>
                         Supplier
+                    </a>
+                    <a href="{{route('penjualans.index')}}" class="sidebar-item flex items-center px-4 py-3 text-sm font-medium rounded-r-lg {{ request()->routeIs('supplier.*') ? 'active' : '' }}">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-primary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                        </svg>
+                        Pembelian
+                    </a>
+                    <a href="{{route('detail-penjualans.index')}}" class="sidebar-item flex items-center px-4 py-3 text-sm font-medium rounded-r-lg {{ request()->routeIs('supplier.*') ? 'active' : '' }}">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-primary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                        </svg>
+                        Detail Penjualan
                     </a>
                 </nav>
 
