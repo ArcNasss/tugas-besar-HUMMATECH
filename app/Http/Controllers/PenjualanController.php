@@ -62,6 +62,13 @@ class PenjualanController extends Controller
 
         return redirect()->route('penjualans.index')->with('success', 'Data penjualan berhasil diperbarui.');
     }
+    public function show(Penjualan $penjualan)
+{
+    $penjualan->load('user', 'pembeli', 'detailPenjualans.barang');
+
+    return view('penjualans.show', compact('penjualan'));
+}
+
 
     public function destroy(Penjualan $penjualan)
     {
@@ -72,9 +79,9 @@ class PenjualanController extends Controller
 
 
 
-public function exportPdf(Request $request)
+public function cetakPdf(Request $request)
 {
-    $penjualans = Penjualan::with('user', 'detailPenjualans')->latest()->get();
+    $penjualans = Penjualan::with('user', 'detailPenjualans.barang')->latest()->get();
 
     $pdf = Pdf::loadView('penjualans.laporan_pdf', compact('penjualans'));
     return $pdf->download('laporan-penjualan.pdf');

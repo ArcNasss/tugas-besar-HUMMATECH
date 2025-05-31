@@ -23,4 +23,9 @@ class Penjualan extends Model
         return $this->hasMany(DetailPenjualan::class);
     }
 
+    public function barang(){
+        return $this->belongsTo(Barang::class, 'barang_id');
+    }
+
+
 }

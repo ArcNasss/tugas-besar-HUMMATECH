@@ -7,6 +7,7 @@ use App\Http\Controllers\pembelianController;
 use App\Http\Controllers\KategoriController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BarangController;
+use App\Http\Controllers\CetakController;
 use App\Http\Controllers\DetailPenjualanController;
 use App\Http\Controllers\PenjualanController;
 
@@ -15,7 +16,7 @@ use App\Http\Controllers\PenjualanController;
 
 Route::get('/', function () {
     return view('layouts.app');
-})->name('dashboard');
+})->name('dashboard')->middleware('auth');
 
 Route::get('/register', [AuthController::class, 'showRegistrationForm'])->name('register')->middleware('guest');
 Route::post('/register', [AuthController::class, 'register'])->name('register.post');
@@ -33,6 +34,6 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('penjualans', PenjualanController::class);
     Route::resource('detail-penjualans', DetailPenjualanController::class);
 
-
-    Route::get('/penjualans/cetak-pdf', [PenjualanController::class, 'cetakPdf'])->name('penjualans.cetak-pdf');
 });
+
+Route::get('penjualans/laporan-pdf', [CetakController::class, 'cetakPdf'])->name('penjualans.laporan_pdf')->middleware('auth');

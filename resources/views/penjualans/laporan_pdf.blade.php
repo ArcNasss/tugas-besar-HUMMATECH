@@ -28,19 +28,19 @@
         </thead>
         <tbody>
             @foreach($penjualans as $i => $penjualan)
-                <tr>
-                    <td>{{ $i + 1 }}</td>
-                    <td>{{ $penjualan->detailPenjualans }}</td>
-                    <td>{{ $penjualan->jumlah }}</td>
-                    <td>Rp {{ number_format($penjualan->harga_satuan, 0, ',', '.') }}</td>
-                    <td>Rp {{ number_format($penjualan->jumlah * $penjualan->harga_satuan, 0, ',', '.') }}</td>
-                    <td>{{ $penjualan->user->name }}</td>
-                   <td>
-    {{ $penjualan->created_at ? $penjualan->created_at->format('d-m-Y H:i') : '-' }}
-</td>
+    @foreach($penjualan->detailPenjualans as $detail)
+        <tr>
+            <td>{{ $loop->iteration }}</td>
+            <td>{{ $detail->barang->nama }}</td>
+            <td>{{ $detail->jumlah }}</td>
+            <td>Rp {{ number_format($detail->harga_satuan, 0, ',', '.') }}</td>
+            <td>Rp {{ number_format($detail->jumlah * $detail->harga_satuan, 0, ',', '.') }}</td>
+            <td>{{ $penjualan->user->name }}</td>
+            <td>{{ $penjualan->created_at->format('d-m-Y H:i') }}</td>
+        </tr>
+    @endforeach
+@endforeach
 
-                </tr>
-            @endforeach
         </tbody>
     </table>
 </body>

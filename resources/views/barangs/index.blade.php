@@ -24,7 +24,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($barangs as $barang)
+                @forelse($barangs as $barang)
                     <tr class="border-t border-gray-600">
                         <td class="px-4 py-2">{{ $barang->nama }}</td>
                         <td class="px-4 py-2">
@@ -46,7 +46,11 @@
                             </form>
                         </td>
                     </tr>
-                @endforeach
+                    @empty
+                        <tr>
+                            <td colspan="6" class="px-4 py-2 text-center">Tidak ada data barang.</td>
+                        </tr>
+                    @endforelse
             </tbody>
         </table>
     </div>

@@ -34,16 +34,17 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($penjualans as $penjualan)
+                @forelse($penjualans as $penjualan)
                     <tr class="border-t border-gray-600">
                         <td class="px-4 py-2">{{ $penjualan->pembeli->nama ?? '-' }}</td>
                         <td class="px-4 py-2">{{ $penjualan->user->name }}</td>
                         <td class="px-4 py-2">{{ $penjualan->tanggal_pesan }}</td>
                         <td class="px-4 py-2 space-x-2">
                             <a href="{{ route('penjualans.edit', $penjualan) }}" class="bg-yellow-500 hover:bg-yellow-600 px-3 py-1 rounded">Edit</a>
-                            <a href="{{ route('penjualan.export.pdf') }}" class="bg-red-600 hover:bg-red-700 px-4 py-2 rounded inline-block text-white mb-4">
+                            <a href="{{ route('penjualans.laporan_pdf') }}" class="btn btn-primary" target="blank">
                                 Download PDF
                             </a>
+
 
                             <form action="{{ route('penjualans.destroy', $penjualan) }}" method="POST" class="inline-block" onsubmit="return confirm('Yakin hapus?')">
                                 @csrf
@@ -52,7 +53,11 @@
                             </form>
                         </td>
                     </tr>
-                @endforeach
+                @empty
+                    <tr>
+                        <td colspan="4" class="px-4 py-2 text-center">Tidak ada data penjualan.</td>
+                    </tr>
+                @endforelse
             </tbody>
         </table>
     </div>
