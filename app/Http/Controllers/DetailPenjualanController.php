@@ -12,10 +12,16 @@ use Illuminate\Http\Request;
 
 class DetailPenjualanController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $detailPenjualans = DetailPenjualan::with(['penjualan', 'barang'])->paginate(10);
-        return view('detail_penjualans.index', compact('detailPenjualans'));
+        $sort = $request->get('sort', 'asc');
+
+        $detailPenjualans = DetailPenjualan::with(['penjualan', 'barang'])
+            ->orderBy('created_at', $sort)
+            ->paginate(10)
+            ->withQueryString();
+
+        return view('detail_penjualans.index', compact('detailPenjualans', 'sort'));
     }
 
     public function create()

@@ -13,7 +13,7 @@ class Penjualan extends Model
         return $this->belongsTo(Pembeli::class);
     }
 
-    public function kasir()
+    public function user()
     {
         return $this->belongsTo(User::class);
     }
@@ -22,4 +22,5 @@ class Penjualan extends Model
     {
         return $this->hasMany(DetailPenjualan::class);
     }
+
 }

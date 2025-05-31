@@ -17,7 +17,20 @@
                     <th class="px-4 py-2">Barang</th>
                     <th class="px-4 py-2">Jumlah</th>
                     <th class="px-4 py-2">Suplier</th>
-                    <th class="px-4 py-2">Tanggal</th>
+                    <th class="px-4 py-2">
+                            <a href="{{ route('pembelians.index', ['sort' => $sort === 'asc' ? 'desc' : 'asc']) }}" class="hover:underline flex items-center space-x-1">
+                                <span>Tanggal</span>
+                                @if($sort === 'asc')
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
+                                    </svg>
+                                @else
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                    </svg>
+                                @endif
+                        </a>
+                    </th>
                     <th class="px-4 py-2">Status</th>
                     <th class="px-4 py-2">Aksi</th>
                 </tr>
@@ -27,7 +40,7 @@
                     <tr class="border-t border-gray-600">
                         <td class="px-4 py-2">{{ $pembelian->barang->nama }}</td>
                         <td class="px-4 py-2">{{ $pembelian->jumlah }}</td>
-                        <td class="px-4 py-2">{{ $pembelian->suplier->nama }}</td>
+                        <td class="px-4 py-2">{{ $pembelian->suplier }}</td>
                         <td class="px-4 py-2">{{ $pembelian->tanggal }}</td>
                         <td class="px-4 py-2">{{ $pembelian->status }}</td>
                         <td class="px-4 py-2 space-x-2">

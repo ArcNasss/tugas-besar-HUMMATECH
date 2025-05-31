@@ -91,35 +91,52 @@
                 @csrf
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                        <label for="nama" class="block text-sm font-medium text-primary-100 mb-2">Nama Lengkap</label>
+                        <label for="username" class="block text-sm font-medium text-primary-100 mb-2">Nama Lengkap</label>
                         <div class="relative">
                             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-primary-400">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                                     <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
                                 </svg>
                             </div>
-                            <input id="nama" name="nama" type="text" required
+                            <input id="username" name="username" type="text" required
                                    class="input-field w-full pl-10 pr-3 py-3 rounded-lg border border-white/10 focus:outline-none focus:ring-0"
-                                   placeholder="Nama lengkap">
+                                   placeholder="username anda">
+                        </div>
+                    </div>
+
+
+                </div>
+
+                    <div>
+                        <label for="password" class="block text-sm font-medium text-primary-100 mb-2">Password</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-primary-400">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M5 8V6a5 5 0 0110 0v2h1a1 1 0 011 1v9a1 1 0 01-1 1H4a1 1 0 01-1-1V9a1 1 0 011-1h1zm2-2a3 3 0 016 0v2H7V6z" clip-rule="evenodd" />
+                            </svg>
+                            </div>
+                            <input id="password" name="password" type="password" required
+                                   class="input-field w-full pl-10 pr-3 py-3 rounded-lg border border-white/10 focus:outline-none focus:ring-0"
+                                   placeholder="password anda">
                         </div>
                     </div>
 
                     <div>
-                        <label for="no_hp" class="block text-sm font-medium text-primary-100 mb-2">Nomor HP</label>
+                        <label for="password_confirmation" class="block text-sm font-medium text-primary-100 mb-2">Password Confirm</label>
                         <div class="relative">
                             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-primary-400">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                    <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
-                                </svg>
+                                <path fill-rule="evenodd" d="M5 8V6a5 5 0 0110 0v2h1a1 1 0 011 1v9a1 1 0 01-1 1H4a1 1 0 01-1-1V9a1 1 0 011-1h1zm2-2a3 3 0 016 0v2H7V6z" clip-rule="evenodd" />
+                            </svg>
                             </div>
-                            <input id="no_hp" name="no_hp" type="tel" required
+                            <input id="password_confirmation" name="password_confirmation" type="password" required
                                    class="input-field w-full pl-10 pr-3 py-3 rounded-lg border border-white/10 focus:outline-none focus:ring-0"
-                                   placeholder="0812-3456-7890">
+                                   placeholder="password anda">
                         </div>
                     </div>
                 </div>
 
-                <div>
+                {{-- <div>
                     <label class="block text-sm font-medium text-primary-100 mb-2">Jenis Kelamin</label>
                     <div class="grid grid-cols-2 gap-3">
                         <label class="radio-card rounded-lg border border-white/10 p-4 flex items-center cursor-pointer transition-all">
@@ -141,21 +158,9 @@
                             </div>
                         </label>
                     </div>
-                </div>
+                </div>---}}
 
-                <div>
-                    <label for="alamat" class="block text-sm font-medium text-primary-100 mb-2">Alamat</label>
-                    <div class="relative">
-                        <div class="absolute inset-y-0 left-0 pl-3 pt-3 flex items-start pointer-events-none text-primary-400">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
-                            </svg>
-                        </div>
-                        <textarea id="alamat" name="alamat" rows="3" required
-                               class="input-field w-full pl-10 pr-3 py-3 rounded-lg border border-white/10 focus:outline-none focus:ring-0"
-                               placeholder="Alamat lengkap"></textarea>
-                    </div>
-                </div>
+
 
                 <div>
                     <button type="submit"
@@ -207,67 +212,41 @@
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js" defer></script>
     <script>
-    // Pastikan DOM sudah fully loaded
-    document.addEventListener('DOMContentLoaded', function() {
-        @if(session('success'))
-            showToast('success', '{{ session('success') }}');
-        @endif
-        @if(session('error'))
-            showToast('error', '{{ session('error') }}');
-        @endif
-        @if(session('warning'))
-            showToast('warning', '{{ session('warning') }}');
-        @endif
-    });
+        function showToast(type = 'success', message = 'Operasi berhasil') {
+            const toast = document.getElementById('toast');
+            const icon = document.getElementById('toast-icon');
+            const title = document.getElementById('toast-title');
+            const msg = document.getElementById('toast-message');
 
-    // Fungsi toast yang lebih robust
-    function showToast(type, message) {
-        const toast = document.getElementById('toast');
-        if (!toast) return;
+            title.textContent = type === 'success' ? 'Sukses' : 'Gagal';
+            msg.textContent = message;
 
-        const toastIcon = document.getElementById('toast-icon');
-        const toastTitle = document.getElementById('toast-title');
-        const toastMessage = document.getElementById('toast-message');
+            icon.innerHTML = type === 'success'
+                ? `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />`
+                : `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />`;
 
-        // Reset classes
-        toastIcon.className = 'h-6 w-6';
-        toastTitle.className = 'text-sm font-medium';
+            icon.className = `h-6 w-6 ${type === 'success' ? 'text-primary-400' : 'text-red-400'}`;
 
-        // Set type
-        switch(type) {
-            case 'success':
-                toastIcon.classList.add('text-primary-400');
-                toastTitle.classList.add('text-white');
-                toastIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />';
-                toastTitle.textContent = 'Success';
-                break;
-            case 'error':
-                toastIcon.classList.add('text-red-500');
-                toastTitle.classList.add('text-red-400');
-                toastIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />';
-                toastTitle.textContent = 'Error';
-                break;
-            case 'warning':
-                toastIcon.classList.add('text-yellow-500');
-                toastTitle.classList.add('text-yellow-400');
-                toastIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />';
-                toastTitle.textContent = 'Warning';
-                break;
+            toast.classList.remove('hidden');
+
+            setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 5000);
         }
 
-        toastMessage.textContent = message;
-        toast.classList.remove('hidden');
+        function hideToast() {
+            document.getElementById('toast').classList.add('hidden');
+        }
 
-        setTimeout(() => {
-            toast.classList.add('hidden');
-        }, 5000);
-    }
+        document.addEventListener('DOMContentLoaded', function() {
+            @if(session('success'))
+                showToast('success', '{{ session('success') }}');
+            @elseif(session('error'))
+                showToast('error', '{{ session('error') }}');
+            @endif
+        });
+    </script>
 
-    function hideToast() {
-        const toast = document.getElementById('toast');
-        if (toast) toast.classList.add('hidden');
-    }
-</script>
     @stack('scripts')
 </body>
 </html>

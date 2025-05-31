@@ -8,10 +8,15 @@ use Illuminate\Http\Request;
 
 class SuplierController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $supliers = Suplier::paginate(1);
-        return view('supliers.index', compact('supliers'));
+        $sort = $request->get('sort', 'asc');
+
+        $supliers = Suplier::orderBy('nama', $sort)
+            ->paginate(10)
+            ->withQueryString();
+
+        return view('supliers.index', compact('supliers', 'sort'));
     }
 
     public function create()

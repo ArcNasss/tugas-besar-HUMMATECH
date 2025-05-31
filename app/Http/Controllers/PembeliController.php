@@ -10,10 +10,15 @@ class PembeliController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $pembelis = \App\Models\Pembeli::paginate(10);
-        return view('pembelis.index', compact('pembelis'));
+        $sort = $request->get('sort', 'asc');
+
+        $pembelis = Pembeli::orderBy('nama', $sort)
+            ->paginate(10)
+            ->withQueryString();
+
+        return view('pembelis.index', compact('pembelis', 'sort'));
     }
 
     /**

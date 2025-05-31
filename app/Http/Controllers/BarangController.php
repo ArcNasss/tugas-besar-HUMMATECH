@@ -9,10 +9,15 @@ use Illuminate\Support\Facades\Storage;
 
 class BarangController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $barangs = Barang::with('kategori')->paginate(10);
-        return view('barangs.index', compact('barangs'));
+        $sort = $request->get('sort', 'asc');
+        $barangs = Barang::with('kategori')
+            ->orderBy('nama', $sort)
+            ->paginate(10)
+            ->withQueryString();
+
+        return view('barangs.index', compact('barangs', 'sort'));
     }
 
     public function create()

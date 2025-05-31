@@ -24,10 +24,15 @@ Route::post('/login', [AuthController::class, 'login'])->name('login.post');
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::resource('pembelis', PembeliController::class);
-Route::resource('supliers', SuplierController::class);
-Route::resource('kategoris', KategoriController::class);
-Route::resource('barangs', BarangController::class);
-Route::resource('pembelians', PembelianController::class);
-Route::resource('penjualans', PenjualanController::class);
-Route::resource('detail-penjualans', DetailPenjualanController::class);
+Route::middleware(['auth'])->group(function () {
+    Route::resource('pembelis', PembeliController::class);
+    Route::resource('supliers', SuplierController::class);
+    Route::resource('pembelians', pembelianController::class);
+    Route::resource('kategoris', KategoriController::class);
+    Route::resource('barangs', BarangController::class);
+    Route::resource('penjualans', PenjualanController::class);
+    Route::resource('detail-penjualans', DetailPenjualanController::class);
+
+
+    Route::get('/penjualans/cetak-pdf', [PenjualanController::class, 'cetakPdf'])->name('penjualans.cetak-pdf');
+});

@@ -10,11 +10,18 @@ use Illuminate\Http\Request;
 
 class PembelianController extends Controller
 {
-    public function index()
-    {
-        $pembelians = Pembelian::with(['barang', 'suplier'])->paginate(10);
-        return view('pembelians.index', compact('pembelians'));
-    }
+   public function index(Request $request)
+{
+    $sort = $request->get('sort', 'asc');
+
+    $pembelians = Pembelian::with('barang')
+        ->orderBy('tanggal', $sort)
+        ->paginate(10)
+        ->withQueryString();
+
+    return view('pembelians.index', compact('pembelians', 'sort'));
+}
+
 
     public function create()
     {

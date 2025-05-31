@@ -6,6 +6,10 @@ use App\Models\Pembeli;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Hash;
+
+
 class AuthController extends Controller
 {
 
@@ -13,26 +17,35 @@ class AuthController extends Controller
     {
         return view('auth.register');
     }
-    public function register(Request $request)
-    {
-        $request->validate([
-           'nama' => 'required|string|max:255',
-           'jenis_kelamin' => 'required',
-            'alamat' => 'nullable|string|max:255',
-            'no_hp' => 'nullable|string|max:20',
 
-        ]);
+public function register(Request $request)
+{
+    $validator = Validator::make($request->all(), [
+        'username' => 'required|string|max:255|unique:users,username',
+        'password' => 'required|confirmed|min:6',
+    ]);
 
-        $pembeli = Pembeli::create([
-            'nama' => $request->nama,
-            'jenis_kelamin' => $request->jenis_kelamin,
-            'alamat' => $request->alamat,
-            'no_hp' => $request->no_hp,
-        ]);
-
-
-        return redirect()->route('login')->with('success', 'Registration successful! Please log in.');
+    if ($validator->fails()) {
+        return redirect()->back()
+            ->withErrors($validator)
+            ->withInput()
+            ->with('error', 'Gagal mendaftar. Periksa kembali data Anda.');
     }
+
+    try {
+        User::create([
+            'username' => $request->username,
+            'password' => Hash::make($request->password),
+        ]);
+
+        return redirect()->route('login')->with('success', 'Pendaftaran berhasil! Silakan login.');
+    } catch (\Exception $e) {
+        return redirect()->back()
+            ->withInput()
+            ->with('error', 'Terjadi kesalahan pada server. Coba lagi nanti.');
+    }
+}
+
 
     public function showLoginForm()
     {
@@ -41,18 +54,28 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
+ $validator = Validator::make($request->all(), [
+        'username' => 'required',
+        'password' => 'required',
+    ]);
 
-        $request->validate([
-            'nama' => 'required|string|max:255',
-        ]);
+    if ($validator->fails()) {
+        return redirect()->back()
+            ->withErrors($validator)
+            ->withInput()
+            ->with('error', 'Gagal mendaftar. Periksa kembali data Anda.');
+    }
 
-        if( Pembeli::where('nama', $request->nama)->exists()) {
+        if (Auth::attempt([
+            'username' => $request->username,
+            'password' => $request->password,
+        ])) {
 
-            return redirect()->route('dashboard')->with('success', 'Login successful!');
-        } else {
-            return redirect()->back()->with('error', 'User not found. Please register first.');
-
+            return redirect()->route('dashboard')->with('success', 'Logged in successfully!');
+        }else {
+            return redirect()->back()->with(['error' => 'Invalid credentials.'])->withInput();
         }
+
     }
 
 

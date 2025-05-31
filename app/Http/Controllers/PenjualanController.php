@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 // app/Http/Controllers/PenjualanController.php
 namespace App\Http\Controllers;
-
+use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\Penjualan;
 use App\Models\Pembeli;
 use App\Models\User;
@@ -11,10 +11,16 @@ use Illuminate\Http\Request;
 
 class PenjualanController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $penjualans = Penjualan::with(['pembeli', 'user'])->paginate(10);
-        return view('penjualans.index', compact('penjualans'));
+        $sort = $request->get('sort', 'asc');
+
+        $penjualans = Penjualan::with(['user', 'pembeli'])
+            ->orderBy('tanggal_pesan', $sort)
+            ->paginate(10)
+            ->withQueryString();
+
+        return view('penjualans.index', compact('penjualans', 'sort'));
     }
 
     public function create()
@@ -62,5 +68,17 @@ class PenjualanController extends Controller
         $penjualan->delete();
         return redirect()->route('penjualans.index')->with('success', 'Data penjualan berhasil dihapus.');
     }
+
+
+
+
+public function exportPdf(Request $request)
+{
+    $penjualans = Penjualan::with('user', 'detailPenjualans')->latest()->get();
+
+    $pdf = Pdf::loadView('penjualans.laporan_pdf', compact('penjualans'));
+    return $pdf->download('laporan-penjualan.pdf');
+}
+
 }
 

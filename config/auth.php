@@ -41,7 +41,7 @@ return [
             'provider' => 'users',
         ],
 
-         'pembeli' => [
+        'pembeli' => [
         'driver' => 'session',
         'provider' => 'pembelis',
     ],
@@ -78,7 +78,7 @@ return [
         'pembelis' => [
         'driver' => 'eloquent',
         'model' => App\Models\Pembeli::class,
-    ],
+        ],
 
         // 'users' => [
         //     'driver' => 'database',

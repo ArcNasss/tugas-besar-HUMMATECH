@@ -16,7 +16,20 @@
                 <tr>
                     <th class="px-4 py-2">Pembeli</th>
                     <th class="px-4 py-2">User</th>
-                    <th class="px-4 py-2">Tanggal Pesan</th>
+                    <th class="px-4 py-2">
+                            <a href="{{ route('pembelians.index', ['sort' => $sort === 'asc' ? 'desc' : 'asc']) }}" class="hover:underline flex items-center space-x-1">
+                                <span>Tanggal</span>
+                                @if($sort === 'asc')
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
+                                    </svg>
+                                @else
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                    </svg>
+                                @endif
+                            </a>
+                        </th>
                     <th class="px-4 py-2">Aksi</th>
                 </tr>
             </thead>
@@ -28,6 +41,10 @@
                         <td class="px-4 py-2">{{ $penjualan->tanggal_pesan }}</td>
                         <td class="px-4 py-2 space-x-2">
                             <a href="{{ route('penjualans.edit', $penjualan) }}" class="bg-yellow-500 hover:bg-yellow-600 px-3 py-1 rounded">Edit</a>
+                            <a href="{{ route('penjualan.export.pdf') }}" class="bg-red-600 hover:bg-red-700 px-4 py-2 rounded inline-block text-white mb-4">
+                                Download PDF
+                            </a>
+
                             <form action="{{ route('penjualans.destroy', $penjualan) }}" method="POST" class="inline-block" onsubmit="return confirm('Yakin hapus?')">
                                 @csrf
                                 @method('DELETE')

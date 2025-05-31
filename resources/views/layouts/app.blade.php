@@ -108,14 +108,14 @@
         </div>
 
         <div class="flex items-center space-x-6">
-            <div class="relative hidden md:block">
+            {{-- <div class="relative hidden md:block">
                 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-primary-400">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                         <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
                     </svg>
                 </div>
                 <input type="text" class="input-field pl-10 pr-4 py-2 rounded-lg w-64 focus:outline-none focus:ring-0" placeholder="Cari...">
-            </div>
+            </div> --}}
 
             <div class="flex items-center space-x-4">
                 <button class="text-primary-300 hover:text-white relative">
@@ -128,9 +128,8 @@
                 <div class="relative" x-data="{ open: false }">
                     <button @click="open = !open" class="flex items-center space-x-2 focus:outline-none">
                         <div class="w-8 h-8 rounded-full bg-primary-500/20 flex items-center justify-center border border-primary-500/30">
-                            <span class="text-sm font-medium text-primary-300">US</span>
+                            <span class="text-sm font-medium text-primary-300"> {{ substr(Auth::user()->username, 0, 2) }}</span>
                         </div>
-                        <span class="hidden md:inline text-primary-300></span>
 
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-primary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
@@ -168,49 +167,71 @@
             <div class="p-4">
                 <div class="text-xs uppercase text-primary-400 font-semibold mb-2 px-4">Menu Utama</div>
                 <nav class="space-y-1">
-                    <a href="/" class="sidebar-item flex items-center px-4 py-3 text-sm font-medium rounded-r-lg {{ request()->routeIs('dashboard') ? 'active' : '' }}">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-primary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                        </svg>
-                        Dashboard
-                    </a>
-                    <a href="{{route('pembelis.index')}}" class="sidebar-item flex items-center px-4 py-3 text-sm font-medium rounded-r-lg {{ request()->routeIs('barang.*') ? 'active' : '' }}">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-primary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
-                        </svg>
-                        Pembeli
-                    </a>
-                    <a href="{{route('pembelians.index')}}" class="sidebar-item flex items-center px-4 py-3 text-sm font-medium rounded-r-lg {{ request()->routeIs('penjualan.*') ? 'active' : '' }}">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-primary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-                        </svg>
-                        Pembelian
-                    </a>
-                    <a href="{{route('barangs.index')}}" class="sidebar-item flex items-center px-4 py-3 text-sm font-medium rounded-r-lg {{ request()->routeIs('pembelian.*') ? 'active' : '' }}">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-primary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                        Barang
-                    </a>
-                    <a href="{{route('supliers.index')}}" class="sidebar-item flex items-center px-4 py-3 text-sm font-medium rounded-r-lg {{ request()->routeIs('supplier.*') ? 'active' : '' }}">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-primary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                        </svg>
-                        Supplier
-                    </a>
-                    <a href="{{route('penjualans.index')}}" class="sidebar-item flex items-center px-4 py-3 text-sm font-medium rounded-r-lg {{ request()->routeIs('supplier.*') ? 'active' : '' }}">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-primary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                        </svg>
-                        Pembelian
-                    </a>
-                    <a href="{{route('detail-penjualans.index')}}" class="sidebar-item flex items-center px-4 py-3 text-sm font-medium rounded-r-lg {{ request()->routeIs('supplier.*') ? 'active' : '' }}">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-primary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                        </svg>
-                        Detail Penjualan
-                    </a>
-                </nav>
+    <a href="/" class="sidebar-item flex items-center px-4 py-3 text-sm font-medium rounded-r-lg {{ request()->routeIs('dashboard') ? 'active' : '' }}">
+        <!-- Home icon for Dashboard -->
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-primary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7m-2 2v7a2 2 0 01-2 2H9a2 2 0 01-2-2v-7" />
+        </svg>
+        Dashboard
+    </a>
+
+    <a href="{{ route('pembelis.index') }}" class="sidebar-item flex items-center px-4 py-3 text-sm font-medium rounded-r-lg {{ request()->routeIs('pembelis.*') ? 'active' : '' }}">
+        <!-- User group icon for Pembeli -->
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-primary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87M15 11a4 4 0 11-6 0 4 4 0 016 0z" />
+        </svg>
+        Pembeli
+    </a>
+
+    <a href="{{ route('pembelians.index') }}" class="sidebar-item flex items-center px-4 py-3 text-sm font-medium rounded-r-lg {{ request()->routeIs('pembelians.*') ? 'active' : '' }}">
+        <!-- Shopping cart icon for Pembelian -->
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-primary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293a1 1 0 00.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4z" />
+        </svg>
+        Pembelian
+    </a>
+
+    <a href="{{ route('barangs.index') }}" class="sidebar-item flex items-center px-4 py-3 text-sm font-medium rounded-r-lg {{ request()->routeIs('barangs.*') ? 'active' : '' }}">
+        <!-- Cube icon for Barang -->
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-primary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12v7a2 2 0 01-2 2H6a2 2 0 01-2-2v-7m16 0l-8-5-8 5" />
+        </svg>
+        Barang
+    </a>
+
+    <a href="{{ route('supliers.index') }}" class="sidebar-item flex items-center px-4 py-3 text-sm font-medium rounded-r-lg {{ request()->routeIs('supliers.*') ? 'active' : '' }}">
+        <!-- Truck icon for Supplier -->
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-primary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-6h13v6M9 17a3 3 0 11-6 0 3 3 0 016 0zM9 11V7a2 2 0 00-2-2H4a2 2 0 00-2 2v4" />
+        </svg>
+        Supplier
+    </a>
+
+    <a href="{{ route('penjualans.index') }}" class="sidebar-item flex items-center px-4 py-3 text-sm font-medium rounded-r-lg {{ request()->routeIs('penjualans.*') ? 'active' : '' }}">
+        <!-- Cash or Credit card icon for Penjualan -->
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-primary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h10a2 2 0 002-2v-2M7 13h6" />
+        </svg>
+        Penjualan
+    </a>
+
+    <a href="{{ route('kategoris.index') }}" class="sidebar-item flex items-center px-4 py-3 text-sm font-medium rounded-r-lg {{ request()->routeIs('kategoris.*') ? 'active' : '' }}">
+        <!-- Tag icon for Kategori -->
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-primary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h10l5 5-10 10-5-5 10-10z" />
+        </svg>
+        Kategori
+    </a>
+
+    <a href="{{ route('detail-penjualans.index') }}" class="sidebar-item flex items-center px-4 py-3 text-sm font-medium rounded-r-lg {{ request()->routeIs('detail-penjualans.*') ? 'active' : '' }}">
+        <!-- Document icon for Detail Penjualan -->
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-primary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 4H7a2 2 0 01-2-2V6a2 2 0 012-2h5l5 5v9a2 2 0 01-2 2z" />
+        </svg>
+        Detail Penjualan
+    </a>
+</nav>
+
 
                 <div class="text-xs uppercase text-primary-400 font-semibold mt-6 mb-2 px-4">Laporan</div>
                 <nav class="space-y-1">

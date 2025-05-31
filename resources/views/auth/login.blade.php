@@ -105,16 +105,29 @@
             <form class="space-y-6" method="POST" action="{{ route('login') }}">
                 @csrf
                 <div>
-                    <label for="nama" class="block text-sm font-medium text-primary-100 mb-2">Nama</label>
+                    <label for="username" class="block text-sm font-medium text-primary-100 mb-2">Nama</label>
                     <div class="relative">
                         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-primary-400">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                                 <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
                             </svg>
                         </div>
-                        <input id="nama" name="nama" type="text" required
+                        <input id="useraname" name="username" type="text" required
                                class="input-field w-full pl-10 pr-3 py-3 rounded-lg border border-white/10 focus:outline-none focus:ring-0"
-                               placeholder="masukkan nama anda">
+                               placeholder="masukkan username">
+                    </div>
+                </div>
+                <div>
+                    <label for="password" class="block text-sm font-medium text-primary-100 mb-2">Nama</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-primary-400">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M5 8V6a5 5 0 0110 0v2h1a1 1 0 011 1v9a1 1 0 01-1 1H4a1 1 0 01-1-1V9a1 1 0 011-1h1zm2-2a3 3 0 016 0v2H7V6z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <input id="password" name="password" type="text" required
+                               class="input-field w-full pl-10 pr-3 py-3 rounded-lg border border-white/10 focus:outline-none focus:ring-0"
+                               placeholder="masukkan password">
                     </div>
                 </div>
 
